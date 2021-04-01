@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-01T06:42:06.192Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="I2BghCtiBFcsdL8iiYv6" version="14.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-01T06:46:44.064Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36" etag="LH-0Wr1Iurw26-ma9Eq-" version="14.5.3" type="github">
   <diagram id="OJwl7VF2aaMQ7D2Qhbce" name="Page-1">
-    <mxGraphModel dx="2447" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="2207" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -672,7 +672,7 @@
         <mxCell id="GeIdy100ILQXvOGni47h-221" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;" parent="1" source="GeIdy100ILQXvOGni47h-219" target="GeIdy100ILQXvOGni47h-218" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GeIdy100ILQXvOGni47h-219" value="검색어&lt;br&gt;[FK]" style="ellipse;whiteSpace=wrap;html=1;flipH=1;flipV=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
+        <mxCell id="GeIdy100ILQXvOGni47h-219" value="검색어" style="ellipse;whiteSpace=wrap;html=1;flipH=1;flipV=1;" parent="1" vertex="1">
           <mxGeometry x="1162.5" y="1200" width="70" height="50" as="geometry" />
         </mxCell>
         <mxCell id="GeIdy100ILQXvOGni47h-240" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;" parent="1" source="GeIdy100ILQXvOGni47h-230" target="GeIdy100ILQXvOGni47h-235" edge="1">
