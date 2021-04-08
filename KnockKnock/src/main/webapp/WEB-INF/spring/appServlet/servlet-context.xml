@@ -29,7 +29,7 @@
 	</beans:bean>
 	
 	
-	<context:component-scan base-package="com.project.knock.common" />
+	<context:component-scan base-package="com.project.knock" />
 	
 	
 	
