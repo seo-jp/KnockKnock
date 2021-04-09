@@ -15,8 +15,8 @@
     <!-- MySQL dataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-       <property name="url" value="jdbc:mysql://localhost:3306/knockknock?useSSL=false&amp;serverTimezone=UTC"></property>
-       <property name="username" value="root"></property>
+       <property name="url" value="jdbc:mysql://localhost:3306/kk?useSSL=false&amp;serverTimezone=UTC"></property>
+       <property name="username" value="knock"></property>
        <property name="password" value="tiger"></property>
     </bean>
     
