@@ -1,11 +1,4 @@
 -- 회원
-ALTER TABLE USER
-	DROP PRIMARY KEY; -- 유저
-
--- 회원
-DROP TABLE IF EXISTS USER RESTRICT;
-
--- 회원
 CREATE TABLE USER (
 	USER_IDX    INT          NOT NULL, -- USERIDX
 	USER_ID     VARCHAR(45)  NOT NULL, -- 유저ID
@@ -34,13 +27,6 @@ ALTER TABLE USER
     
 ----------------------------------------------------------------------------------
 -- 카테고리
-ALTER TABLE CATEGORY
-	DROP PRIMARY KEY; -- 카테고리 기본키
-
--- 카테고리
-DROP TABLE IF EXISTS CATEGORY RESTRICT;
-
--- 카테고리
 CREATE TABLE CATEGORY (
 	CTG_IDX      INT         NOT NULL, -- IDX
 	CTG_CATEGORY VARCHAR(20) NOT NULL  -- 카테고리
@@ -52,24 +38,9 @@ ALTER TABLE CATEGORY
 		PRIMARY KEY (
 			CTG_IDX -- IDX
 		);
-
-ALTER TABLE CATEGORY
-	MODIFY COLUMN CTG_IDX INT NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE CATEGORY
-	AUTO_INCREMENT = 1;    
+  
 --------------------------------------------------------------------------- 
 
--- 키워드
-ALTER TABLE KEYWORD
-	DROP FOREIGN KEY FK_CATEGORY_TO_KEYWORD; -- 카테고리 -> 키워드
-
--- 키워드
-ALTER TABLE KEYWORD
-	DROP PRIMARY KEY; -- 키워드 기본키
-
--- 키워드
-DROP TABLE IF EXISTS KEYWORD RESTRICT;
 
 -- 키워드
 CREATE TABLE KEYWORD (
@@ -85,12 +56,6 @@ ALTER TABLE KEYWORD
 			KEY_IDX -- 키워드IDX
 		);
 
-ALTER TABLE KEYWORD
-	MODIFY COLUMN KEY_IDX INT NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE KEYWORD
-	AUTO_INCREMENT = 1;
-
 -- 키워드
 ALTER TABLE KEYWORD
 	ADD CONSTRAINT FK_CATEGORY_TO_KEYWORD -- 카테고리 -> 키워드
@@ -102,20 +67,6 @@ ALTER TABLE KEYWORD
 		);
         
 ----------------------------------------------------------------------------------
--- 유저키워드
-ALTER TABLE USERKEY
-	DROP FOREIGN KEY FK_USER_TO_USERKEY; -- 회원 -> 유저키워드
-
--- 유저키워드
-ALTER TABLE USERKEY
-	DROP FOREIGN KEY FK_KEYWORD_TO_USERKEY; -- 키워드 -> 유저키워드
-
--- 유저키워드
-ALTER TABLE USERKEY
-	DROP PRIMARY KEY; -- 유저키워드 기본키
-
--- 유저키워드
-DROP TABLE IF EXISTS USERKEY RESTRICT;
 
 -- 유저키워드
 CREATE TABLE USERKEY (
@@ -160,20 +111,6 @@ ALTER TABLE USERKEY
 			KEY_IDX -- 키워드IDX
 		);
 -------------------------------------------------------------------------------------
--- 게시물
-ALTER TABLE CONTENT
-	DROP FOREIGN KEY FK_USER_TO_CONTENT; -- 회원 -> 게시물
-
--- 게시물
-ALTER TABLE CONTENT
-	DROP FOREIGN KEY FK_KEYWORD_TO_CONTENT; -- 키워드 -> 게시물
-
--- 게시물
-ALTER TABLE CONTENT
-	DROP PRIMARY KEY; -- 게시물
-
--- 게시물
-DROP TABLE IF EXISTS CONTENT RESTRICT;
 
 -- 게시물
 CREATE TABLE CONTENT (
@@ -219,24 +156,6 @@ ALTER TABLE CONTENT
 			KEY_IDX -- 키워드IDX
 		);
 --------------------------------------------------------------------------
--- 키워드작성
-ALTER TABLE KEYWORD_RECORD
-	DROP FOREIGN KEY FK_KEYWORD_TO_KEYWORD_RECORD; -- 키워드 -> 키워드작성
-
--- 키워드작성
-ALTER TABLE KEYWORD_RECORD
-	DROP FOREIGN KEY FK_CONTENT_TO_KEYWORD_RECORD; -- 게시물 -> 키워드작성
-
--- 키워드작성
-ALTER TABLE KEYWORD_RECORD
-	DROP FOREIGN KEY FK_USER_TO_KEYWORD_RECORD; -- 회원 -> 키워드작성
-
--- 키워드작성
-ALTER TABLE KEYWORD_RECORD
-	DROP PRIMARY KEY; -- 키워드작성 기본키
-
--- 키워드작성
-DROP TABLE IF EXISTS KEYWORD_RECORD RESTRICT;
 
 -- 키워드작성
 CREATE TABLE KEYWORD_RECORD (
@@ -290,20 +209,6 @@ ALTER TABLE KEYWORD_RECORD
 			USER_IDX -- USERIDX
 		);
 -------------------------------------------------------------------------
--- 태그
-ALTER TABLE TAG
-	DROP FOREIGN KEY FK_CONTENT_TO_TAG; -- 게시물 -> 태그
-
--- 태그
-ALTER TABLE TAG
-	DROP FOREIGN KEY FK_USER_TO_TAG; -- 회원 -> 태그
-
--- 태그
-ALTER TABLE TAG
-	DROP PRIMARY KEY; -- 태그 기본키
-
--- 태그
-DROP TABLE IF EXISTS TAG RESTRICT;
 
 -- 태그
 CREATE TABLE TAG (
@@ -347,20 +252,6 @@ ALTER TABLE TAG
 			USER_IDX -- USERIDX
 		);
 ----------------------------------------------------------------------
--- 댓글
-ALTER TABLE COMMENT
-	DROP FOREIGN KEY FK_CONTENT_TO_COMMENT; -- 게시물 -> 댓글
-
--- 댓글
-ALTER TABLE COMMENT
-	DROP FOREIGN KEY FK_USER_TO_COMMENT; -- 회원 -> 댓글
-
--- 댓글
-ALTER TABLE COMMENT
-	DROP PRIMARY KEY; -- 댓글 기본키
-
--- 댓글
-DROP TABLE IF EXISTS COMMENT RESTRICT;
 
 -- 댓글
 CREATE TABLE COMMENT (
@@ -404,24 +295,6 @@ ALTER TABLE COMMENT
 			USER_IDX -- USERIDX
 		);
 ------------------------------------------------------------------------------
--- 노크
-ALTER TABLE KNOCK
-	DROP FOREIGN KEY FK_CONTENT_TO_KNOCK; -- 게시물 -> 노크
-
--- 노크
-ALTER TABLE KNOCK
-	DROP FOREIGN KEY FK_USER_TO_KNOCK; -- 회원 -> 노크
-
--- 노크
-ALTER TABLE KNOCK
-	DROP FOREIGN KEY FK_COMMENT_TO_KNOCK; -- 댓글 -> 노크
-
--- 노크
-ALTER TABLE KNOCK
-	DROP PRIMARY KEY; -- 노크 기본키
-
--- 노크
-DROP TABLE IF EXISTS KNOCK RESTRICT;
 
 -- 노크
 CREATE TABLE KNOCK (
@@ -476,16 +349,6 @@ ALTER TABLE KNOCK
 			RE_IDX -- REIDX
 		);
 ------------------------------------------------------------------------
--- 검색기록
-ALTER TABLE SEARCH_RECORD
-	DROP FOREIGN KEY FK_USER_TO_SEARCH_RECORD; -- 회원 -> 검색기록
-
--- 검색기록
-ALTER TABLE SEARCH_RECORD
-	DROP PRIMARY KEY; -- 검색기록 기본키
-
--- 검색기록
-DROP TABLE IF EXISTS SEARCH_RECORD RESTRICT;
 
 -- 검색기록
 CREATE TABLE SEARCH_RECORD (
@@ -518,20 +381,6 @@ ALTER TABLE SEARCH_RECORD
 			USER_IDX -- USERIDX
 		);
 ---------------------------------------------------------------------
--- 알람
-ALTER TABLE ALARM
-	DROP FOREIGN KEY FK_USER_TO_ALARM; -- 회원 -> 알람
-
--- 알람
-ALTER TABLE ALARM
-	DROP FOREIGN KEY FK_USER_TO_ALARM2; -- 회원 -> 알람2
-
--- 알람
-ALTER TABLE ALARM
-	DROP PRIMARY KEY; -- 알람
-
--- 알람
-DROP TABLE IF EXISTS ALARM RESTRICT;
 
 -- 알람
 CREATE TABLE ALARM (
@@ -575,20 +424,6 @@ ALTER TABLE ALARM
 			USER_IDX -- USERIDX
 		);
 ----------------------------------------------------------------------
--- 메세지리스트
-ALTER TABLE MESSAGELIST
-	DROP FOREIGN KEY FK_USER_TO_MESSAGELIST; -- 회원 -> 메세지리스트
-
--- 메세지리스트
-ALTER TABLE MESSAGELIST
-	DROP FOREIGN KEY FK_USER_TO_MESSAGELIST2; -- 회원 -> 메세지리스트2
-
--- 메세지리스트
-ALTER TABLE MESSAGELIST
-	DROP PRIMARY KEY; -- 메세지리스트
-
--- 메세지리스트
-DROP TABLE IF EXISTS MESSAGELIST RESTRICT;
 
 -- 메세지리스트
 CREATE TABLE MESSAGELIST (
@@ -632,20 +467,6 @@ ALTER TABLE MESSAGELIST
 			USER_IDX -- USERIDX
 		);
 ------------------------------------------------------------------
--- 메세지
-ALTER TABLE MESSAGE
-	DROP FOREIGN KEY FK_USER_TO_MESSAGE; -- 회원 -> 메세지
-
--- 메세지
-ALTER TABLE MESSAGE
-	DROP FOREIGN KEY FK_MESSAGELIST_TO_MESSAGE; -- 메세지리스트 -> 메세지
-
--- 메세지
-ALTER TABLE MESSAGE
-	DROP PRIMARY KEY; -- 메세지
-
--- 메세지
-DROP TABLE IF EXISTS MESSAGE RESTRICT;
 
 -- 메세지
 CREATE TABLE MESSAGE (
@@ -691,20 +512,6 @@ ALTER TABLE MESSAGE
 			ML_ID -- 리스트ID
 		);
 -------------------------------------------------------------------------------
--- 팔로잉
-ALTER TABLE FOLLOWING
-	DROP FOREIGN KEY FK_USER_TO_FOLLOWING; -- 회원 -> 팔로잉
-
--- 팔로잉
-ALTER TABLE FOLLOWING
-	DROP FOREIGN KEY FK_USER_TO_FOLLOWING2; -- 회원 -> 팔로잉2
-
--- 팔로잉
-ALTER TABLE FOLLOWING
-	DROP PRIMARY KEY; -- 팔로잉
-
--- 팔로잉
-DROP TABLE IF EXISTS FOLLOWING RESTRICT;
 
 -- 팔로잉
 CREATE TABLE FOLLOWING (
@@ -747,20 +554,6 @@ ALTER TABLE FOLLOWING
 			USER_IDX -- USERIDX
 		);
 ------------------------------------------------------------------------------
--- 팔로워
-ALTER TABLE FOLLOWER
-	DROP FOREIGN KEY FK_USER_TO_FOLLOWER; -- 회원 -> 팔로워
-
--- 팔로워
-ALTER TABLE FOLLOWER
-	DROP FOREIGN KEY FK_USER_TO_FOLLOWER2; -- 회원 -> 팔로워2
-
--- 팔로워
-ALTER TABLE FOLLOWER
-	DROP PRIMARY KEY; -- 팔로워
-
--- 팔로워
-DROP TABLE IF EXISTS FOLLOWER RESTRICT;
 
 -- 팔로워
 CREATE TABLE FOLLOWER (

@@ -1,0 +1,27 @@
+insert into category values(1,'건강');
+insert into category values(2,'게임');
+insert into category values(3,'과학');
+insert into category values(4,'금융');
+insert into category values(5,'뉴스');
+insert into category values(6,'도서,문학');
+insert into category values(7,'미용,건강');
+insert into category values(8,'부동산');
+insert into category values(9,'비즈니스,산업');
+insert into category values(10,'사법,정부기관');
+insert into category values(11,'쇼핑');
+insert into category values(12,'스포츠');
+insert into category values(13,'식음료');
+insert into category values(14,'애완동물,동물');
+insert into category values(15,'여행');
+insert into category values(16,'예술,엔터테인먼트');
+insert into category values(17,'온라인커뮤니티');
+insert into category values(18,'인터넷,통신');
+insert into category values(19,'자동차');
+insert into category values(20,'직업,교육');
+insert into category values(21,'집단,사회');
+insert into category values(22,'참고문헌');
+insert into category values(23,'취미,레저');
+insert into category values(24,'컴퓨터,가전제품');
+insert into category values(25,'홈,가든');
+
+commit;
