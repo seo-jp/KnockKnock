@@ -8,4 +8,6 @@ public interface UserService {
 
 	int findUserid(String user_id);
 
+	UserVO loginCheck(String user_id, String user_pwd);
+
 }

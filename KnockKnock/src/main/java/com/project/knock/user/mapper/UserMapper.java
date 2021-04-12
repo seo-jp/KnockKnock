@@ -11,4 +11,6 @@ public interface UserMapper {
 
 	int findUserid(String user_id);
 
+	UserVO loginCheck(String user_id);
+
 }

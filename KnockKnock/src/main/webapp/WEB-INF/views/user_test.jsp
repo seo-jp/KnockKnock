@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +11,20 @@
 </head>
 <body>
    <div>
-   아이디: <input type="text" id="id" name="user_id"><br>
+   아이디: <input type="text" id="id" name="user_id" oninput ="checkId()"><span id = "chkMsg"></span> <br>
    비번: <input type="password" id="pwd" name="user_pwd"><br>
    이름: <input type="text" id="name" name="user_name"><br>
    연락처: <input type="text" id="tel" name="user_tel"><br>
    메일: <input type="text" id="email" name="user_email"><br>
    <button type="button" onclick="joinUser()">가입</button>
    </div>
-   
+   <br>
+   <div>
+   <input type="text" id="loginId" name="user_id" value="아이디"><br>
+   <input type="text" id="loginPwd" name="user_pwd" value="비밀번호"><br>
+   <!-- <input type="checkbox" id="saveId" value="HTML">아이디 저장 -->
+   <button type="button" onclick="login()">로그인</button>
+   </div>
    
    <script>
     function joinUser(){
@@ -38,8 +45,8 @@
     		dataType: 'json',
     		traditional: true,
     		success: function(data){
-    			var n = parseInt(data.result);
-    			if(n<=0){
+    			
+    			if(data<=0){
     				alert('회원가입 실패');
     			}else{
     				alert('회원가입 완료');
@@ -50,7 +57,49 @@
     		}    		
     	});
     }
+    
+    function checkId(){
+    	
+    	let uid = document.getElementById("id").value;
+    	
+    	$.ajax({
+    		type: 'post',
+    		url: 'checkId',
+    		data: {user_id:uid},
+    		success:function(data){
+    			
+    			if(data==0){
+    				$('#chkMsg').html("사용 가능")
+    			}else{
+    				$('#chkMsg').html("사용 불가")
+    			}
+    		},
+    		error:function(err){
+    			alert('error: '+err.status);
+    		}
+    	})	
+    }
    
+    function login(){
+    	
+    	let uid = document.getElementById("loginId").value;
+    	let pwd = document.getElementById("loginPwd").value;
+    	
+    	$.ajax({
+    		type: 'post',
+    		url: 'login',
+    		dataType: 'json',
+    		data: {user_id:uid, user_pwd:pwd},
+    		success:function(data){
+    			location.href = <c:url value="/"/>;
+    		},
+    		error:function(err){
+    			alert('error: '+err.status);
+    		}
+    	})
+    	
+    	
+    }
    </script>
 </body>
 

@@ -2,12 +2,14 @@ package com.project.knock.user.controller;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,35 +34,65 @@ public class UserController {
 	@Autowired
 	private CommonUtil util; 
 
-    @GetMapping("/joinF") //test�슜 �굹以묒뿉 吏��슱爰�
+    @GetMapping("/main") //test
     public String joinForm(Model m) {
     	
     	return "user_test";
     }
     
-    @ResponseBody
+    
     @PostMapping(value="/join", produces="application/json")
-    public int joinUser(@ModelAttribute("user") UserVO user){
+    public ResponseEntity<Integer> joinUser(@ModelAttribute("user") UserVO user) throws Exception{
     	
     	String originPwd = user.getUser_pwd();
     	String user_pwd = pwdEncoder.encode(originPwd);
-    	user.setUser_pwd(user_pwd);
-    	
-    	System.out.println("user="+user);
+    	user.setUser_pwd(user_pwd); 
 
-    	int result = this.userService.insertUser(user);
+    	int result = this.userService.insertUser(user); 
     	
-    	System.out.println("result="+result);
-    	return result;
+    	if(result==0) {
+    		return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+    	}
+    	
+    	return new ResponseEntity<Integer>(result,HttpStatus.OK);
     }
     
-    @CrossOrigin("*")
-    @RequestMapping(value="/idCheck", produces="application/json")
-    public int checkUserid(@RequestParam(value="user_id", required =false)String user_id){
+
+    @PostMapping(value="/checkId", produces="application/json")
+    public ResponseEntity<Integer> checkUserid(Model model,
+    		               @RequestParam(value="user_id", required =false)String user_id) throws Exception{
     	
     	int result = this.userService.findUserid(user_id);
+    	if(result==0) {
+    		return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+    	}
     	
-    	return result;
+    	return new ResponseEntity<Integer>(result,HttpStatus.OK);
     }
+    
+    
+    @PostMapping(value="/login", produces="application/json")
+    public ResponseEntity<String> loginUser(HttpSession ses,
+    		             @RequestParam(value="user_id", required =false)String user_id,
+    		             @RequestParam(value="user_pwd", required =false)String user_pwd) throws Exception{
+    	
+    	if(user_id==null||user_id.trim().isEmpty()||user_pwd==null||user_pwd.trim().isEmpty()) {
+    		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    	}else {
+    		UserVO user = userService.loginCheck(user_id,user_pwd);
+    		if(user==null) {
+    			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);	
+    		}else{
+    			ses.setAttribute("loginUser",user);
+    			String result = " ";
+    			return new ResponseEntity<String>(result,HttpStatus.OK);
+    		} 
+    	}
+    	
+    	
+    	
+    	
+    }
+    
 
 }
