@@ -35,4 +35,14 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
+	
+	@Override
+	public String getIdwithE(String userInfo) {
+		return this.userMapper.getIdwithE(userInfo);
+	}
+	
+	@Override
+	public String getIdwithT(String userInfo) {
+		return this.userMapper.getIdwithT(userInfo);
+	}
 }

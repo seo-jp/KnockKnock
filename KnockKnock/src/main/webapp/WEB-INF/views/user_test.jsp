@@ -19,11 +19,28 @@
    <button type="button" onclick="joinUser()">가입</button>
    </div>
    <br>
+   
+   
    <div>
-   <input type="text" id="loginId" name="user_id" value="아이디"><br>
-   <input type="text" id="loginPwd" name="user_pwd" value="비밀번호"><br>
-   <!-- <input type="checkbox" id="saveId" value="HTML">아이디 저장 -->
+   <input type="text" id="loginId" name="user_id"><br>
+   <input type="text" id="loginPwd" name="user_pwd" ><br>
+   <!--<input type="checkbox" id="saveId" >아이디 저장  -->
    <button type="button" onclick="login()">로그인</button>
+   </div>
+   
+   <br>
+   <div id="find">
+    <p>아이디 찾기</p>
+   <input type="text" id="userInfo" name="userInfo">
+   <button type="button" onclick="findId()">아이디 찾기</button>
+   </div>
+   
+   <br>
+   
+   <div>
+   <input type="text" id="findId" name="user_id"><br>
+   <input type="text" id="findId_email" name="user_email"><br>
+   <button type="button" onclick="findPwd()">메일보내기</button>
    </div>
    
    <script>
@@ -84,12 +101,12 @@
     	
     	let uid = document.getElementById("loginId").value;
     	let pwd = document.getElementById("loginPwd").value;
-    	
+    	//let saveId = document.getElementById("saveId").value;
     	$.ajax({
     		type: 'post',
     		url: 'login',
     		dataType: 'json',
-    		data: {user_id:uid, user_pwd:pwd},
+    		data: {user_id:uid, user_pwd:pwd, saveId:saveId},
     		success:function(data){
     			location.href = <c:url value="/"/>;
     		},
@@ -99,6 +116,45 @@
     	})
     	
     	
+    }
+    
+    
+    function findId(){
+    	
+    	let info = document.getElementById("userInfo").value;
+    	
+    	$.ajax({
+    		type: 'get',
+    		url: 'findId',
+    		dataType: 'json',
+    		data : {userInfo: info},
+    		success:function(data){
+    			$('#find').text(data.msg);
+    		},
+    		error:function(err){
+    			alert('error: '+err.status);
+    		}
+    	})
+    	
+    }
+    
+    function findPwd(){
+    	
+    	let uid = document.getElementById("findId").value;
+    	let email = document.getElementById("findId_email").value;
+    	
+    	$.ajax({
+    		type: 'post',
+    		url: 'findPwd',
+    		dataType= 'json',
+    		data : {user_id:uid, user_email:email},
+    		success:function(data){
+    			alert("메일을 발송했습니다.");
+    		},
+    		error:function(err){
+    			alert('error: '+err.status);
+    		}
+    	})
     }
    </script>
 </body>

@@ -10,4 +10,8 @@ public interface UserService {
 
 	UserVO loginCheck(String user_id, String user_pwd);
 
+	String getIdwithE(String userInfo);
+
+	String getIdwithT(String userInfo);
+
 }

@@ -63,7 +63,7 @@ public class UserController {
     		               @RequestParam(value="user_id", required =false)String user_id) throws Exception{
     	
     	int result = this.userService.findUserid(user_id);
-    	if(result==0) {
+    	if(result==1) {
     		return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
     	}
     	
@@ -79,7 +79,7 @@ public class UserController {
     	if(user_id==null||user_id.trim().isEmpty()||user_pwd==null||user_pwd.trim().isEmpty()) {
     		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     	}else {
-    		UserVO user = userService.loginCheck(user_id,user_pwd);
+    		UserVO user = this.userService.loginCheck(user_id,user_pwd);
     		if(user==null) {
     			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);	
     		}else{
@@ -87,12 +87,47 @@ public class UserController {
     			String result = " ";
     			return new ResponseEntity<String>(result,HttpStatus.OK);
     		} 
+    	}	
+    }
+    
+    @GetMapping(value="/findId", produces="application/json")
+    public ResponseEntity<String> findUserid(
+    		  @RequestParam(value="userInfo", required =false)String userInfo){
+    	System.out.println("1="+userInfo);
+    	if(!userInfo.contains("@")&&!userInfo.contains("-")) {
+    		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     	}
-    	
-    	
-    	
+    	System.out.println("2="+userInfo);
+    	String data ="";
+    	String result ="";
+        if(userInfo.contains("@")) {//이메일이라묜
+        	System.out.println("data="+userInfo);
+        	data= this.userService.getIdwithE(userInfo);
+        	
+        }else if(userInfo.contains("-")){
+        	data= this.userService.getIdwithT(userInfo);
+        }
+        if (data==null) {
+        	result = "{\"msg\": \"해당 연락처의 아이디가 없습니다.\"}";	
+        }else {
+        	result = "{\"msg\": \""+ data +"\"}";
+        }
+    	return new ResponseEntity<String>(result,HttpStatus.OK);
     	
     }
+    
+    @PostMapping(value="/findPwd", produces="application/json")
+    public ResponseEntity<Integer> findPwd(
+    		@RequestParam(value="user_id", required =false)String user_id,
+    		@RequestParam(value="user_email", required =false)String user_email){
+    	
+    	
+    	//아직안함...메일.....
+    	int result =0;
+    	
+    	return new ResponseEntity<Integer>(result,HttpStatus.OK);
+    }
+    
     
 
 }

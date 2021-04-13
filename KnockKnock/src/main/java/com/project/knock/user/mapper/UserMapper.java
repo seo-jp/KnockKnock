@@ -13,4 +13,8 @@ public interface UserMapper {
 
 	UserVO loginCheck(String user_id);
 
+	String getIdwithE(String userInfo);
+
+	String getIdwithT(String userInfo);
+
 }
