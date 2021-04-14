@@ -23,7 +23,10 @@
       <!-- mybatis SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:spring/config/mybatis-config.xml"/>
     </bean>
+    
+    <mybatis-spring:scan base-package="com.project.knock.user.mapper"/>
 
     
 </beans>

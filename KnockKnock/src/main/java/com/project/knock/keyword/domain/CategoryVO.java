@@ -1,4 +1,4 @@
-package com.project.knock.category.domain;
+package com.project.knock.keyword.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -30,6 +30,7 @@
 	
 	
 	<context:component-scan base-package="com.project.knock" />
+	<context:component-scan base-package="com.project.knock.user" />
 	
 	
 	
