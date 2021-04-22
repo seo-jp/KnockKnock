@@ -106,9 +106,13 @@
     		type: 'post',
     		url: 'login',
     		dataType: 'json',
-    		data: {user_id:uid, user_pwd:pwd, saveId:saveId},
+    		data: {user_id:uid, user_pwd:pwd},
     		success:function(data){
-    			location.href = <c:url value="/"/>;
+    			if(data.msg != null){
+    			    alert(data.msg)
+    			}else{    				
+    			    location.href = <c:url value="/"/>;
+    			}
     		},
     		error:function(err){
     			alert('error: '+err.status);
@@ -138,7 +142,7 @@
     	
     }
     
-    function findPwd(){
+/*     function findPwd(){
     	
     	let uid = document.getElementById("findId").value;
     	let email = document.getElementById("findId_email").value;
@@ -155,7 +159,7 @@
     			alert('error: '+err.status);
     		}
     	})
-    }
+    } */
    </script>
 </body>
 

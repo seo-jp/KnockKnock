@@ -75,18 +75,19 @@ public class UserController {
     public ResponseEntity<String> loginUser(HttpSession ses,
     		             @RequestParam(value="user_id", required =false)String user_id,
     		             @RequestParam(value="user_pwd", required =false)String user_pwd) throws Exception{
-    	
+    	System.out.println(user_id+","+user_pwd);
     	if(user_id==null||user_id.trim().isEmpty()||user_pwd==null||user_pwd.trim().isEmpty()) {
     		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     	}else {
+    		String result ="";
     		UserVO user = this.userService.loginCheck(user_id,user_pwd);
     		if(user==null) {
-    			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);	
+    			result = "{\"msg\": \"아이디 및 비밀번호가 일치하지 않습니다.\"}";	
     		}else{
     			ses.setAttribute("loginUser",user);
-    			String result = " ";
-    			return new ResponseEntity<String>(result,HttpStatus.OK);
+    			result = "{\"msg\": null}";		
     		} 
+    		return new ResponseEntity<String>(result,HttpStatus.OK);
     	}	
     }
     
