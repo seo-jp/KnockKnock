@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div style="width:320px; margin:0 auto;">
+        <div>
         <b-form class="mt-5" @submit="onSubmit" @reset="onReset" >
 
             <h3 class="mb-2">유저 정보 작성</h3>
@@ -11,7 +11,7 @@
             class="mb-2"
             v-model="form.name"
             placeholder="이름"
-            type="name"
+            type="text"
             required
             />
 
@@ -102,6 +102,3 @@ export default {
 }
 </script>
 
-<style>
-    @import '../../../assets/css/Login.css';
-</style>

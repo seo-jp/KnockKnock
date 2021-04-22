@@ -3,7 +3,7 @@
     
     <Header v-if="loginSessionId" />
     <div id="content" class="content row h-100 ">
-      <div style="width:100%; margin:0 auto;">
+      <div style="width:100%; margin:0 auto; position:relative;">
         <router-view></router-view>
       </div>
     </div>

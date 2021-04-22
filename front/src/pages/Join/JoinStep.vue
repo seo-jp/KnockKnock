@@ -37,26 +37,16 @@ export default {
     },
     data() {
       return {
-        form: {
-          photo: '',
-        },
-        step: this.$route.params.step,
+        step: null,
       }
     },
-    methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-        //this.$router.push('/Join3')
-      },
-      onReset(event) {
-        event.preventDefault()
-        this.form.photo = ''
-      }
+    created() {
+      this.step = this.$route.params.step
     }
 }
 </script>
 
-<style>
-    @import '../../assets/css/Login.css';
+<style scoped>
+    @import '../../assets/css/Join.css';
 </style>
+

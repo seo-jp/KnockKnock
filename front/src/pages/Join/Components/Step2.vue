@@ -1,9 +1,9 @@
 <template>
   
   <b-form class="text-center modal-choose-form" style="margin-top:100px;" @submit="onSubmit" @reset="onReset" >
-    <h3 class="mt-3 mb-5">키워드 4개를 선택해주세요</h3>
-
-    <ul>
+    <h3 class="mt-3 mb-5">{{ title }}</h3>
+    
+    <ul class="step2-ul">
       <li :key="index" v-for="(list,index) in lists">
         <b-button
         @click=openModal(index)
@@ -18,7 +18,7 @@
     <Button class="mt-5" text="선택완료" />
     
     <Modal 
-    @closeModal="modalShow = !modalShow"
+    @closeModal=closeModal
     v-show="modalShow" :list="lists[currentId]"
     />
   
@@ -41,6 +41,7 @@ export default {
     },
     data() {
       return {
+        title: '키워드를 4개 선택해주세요',
         lists: [
           {
             id: 1,
@@ -80,6 +81,9 @@ export default {
         this.modalShow = !this.modalShow
         this.currentId = id
       },
+      closeModal() {
+        this.modalShow = !this.modalShow
+      },
       onSubmit(event) {
         event.preventDefault()
         alert(JSON.stringify(this.lists))
@@ -94,41 +98,5 @@ export default {
 </script>
 
 <style scoped>
-    h3 {
-      font-size: 18px!important;
-    }
-
-    .modal-btn.btn {
-      width: 150px;
-      height: 140px;
-      background: rgb(248, 247, 247);
-      border-radius: 25px!important;
-      
-    }
-
-    .modal-btn.btn-light {
-      color: rgb(165, 147, 224)!important;
-      font-size: 25px!important;
-      line-height: 1.2!important;
-    }
-
-    span {
-      color: rgb(158, 158, 158);
-      font-size: 13px;
-    }
-
-    ul {
-      padding: 0;
-    }
-
-    ul li {
-      float: left;
-      margin-bottom: 1rem;
-    }
-
-    ul li:nth-child(even){
-      margin-left: 1rem;
-    }
-
-
+     @import '../../../assets/css/Join.css';
 </style>

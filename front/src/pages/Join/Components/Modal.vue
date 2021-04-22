@@ -1,6 +1,33 @@
 <template>
     <div class="modal-box">
         
+        <nav>
+            <a
+             v-show="keyShow"
+             @click="selectCtx(list.ctxId,list.category)"
+             style="left: 20px; top:14px;">
+                <b-icon
+                style="width: 18px; height: 18px;"
+                icon="arrow-return-left"
+                flip-v />
+            </a>
+            
+            <h4 v-show="ctxShow">카테고리</h4>
+            <h4 v-show="keyShow">키워드</h4>
+            
+            <a
+            style="right: 20px; top:12px;">
+                <b-icon icon="x"
+                style="width: 26px; height: 26px;"
+                @click="closeModal()" />
+            </a>
+        </nav>
+
+        <div class="modal-search">
+            <b-form-input placeholder="검색"></b-form-input>
+            <a><b-icon icon="search" /></a>
+        </div>
+
         <!-- category -->
         <ul v-show="ctxShow">
             <li :key="index" v-for="(ctx,index) in categories">
@@ -12,6 +39,7 @@
             </b-button>    
             </li>
         </ul>
+        
 
         <!-- keyword -->
         <ul v-show="keyShow">
@@ -26,8 +54,10 @@
             </li>
         </ul>
 
+        <div class="page-container">
+            <b-pagination v-model="currentPage" pills :total-rows="rows" size="sm"></b-pagination>
+        </div>
 
-        <b-button @click="closeModal()" >취소</b-button>
     </div>
 </template>
 
@@ -48,6 +78,9 @@ export default {
       return {
         ctxShow: true,
         keyShow: false,
+
+        rows: 100,
+        currentPage: 1,
         
         categories: [
             {
@@ -69,6 +102,11 @@ export default {
                 ctxId: 1,
                 id: 2,
                 name: '일본'
+            },
+            {
+                ctxId: 2,
+                id: 1,
+                name: '음주'
             },
         ],
       }
@@ -96,13 +134,5 @@ export default {
 </script>
 
 <style scoped>
-    .modal-box{
-      position: absolute;
-      top: 220px;
-      width: 320px;
-      height: 420px;
-      background-color:rgb(248, 247, 247);
-      border-radius: 10px;
-      border: 0px solid #fff;
-    }
+     @import '../../../assets/css/Join.css';
 </style>
