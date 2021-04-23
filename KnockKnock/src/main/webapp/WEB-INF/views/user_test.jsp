@@ -142,24 +142,30 @@
     	
     }
     
-/*     function findPwd(){
+     function findPwd(){
     	
     	let uid = document.getElementById("findId").value;
     	let email = document.getElementById("findId_email").value;
     	
     	$.ajax({
     		type: 'post',
-    		url: 'findPwd',
-    		dataType= 'json',
+    		url: 'mail',
+    		dataType: 'json',
     		data : {user_id:uid, user_email:email},
     		success:function(data){
-    			alert("메일을 발송했습니다.");
+    			
+    			if(data==1){
+    			    alert("메일을 발송했습니다.");
+    			}else{
+    				alert("해당하는 아이디의 메일주소와 맞지않습니다.")
+    			}
     		},
     		error:function(err){
     			alert('error: '+err.status);
     		}
     	})
-    } */
+    }
+     
    </script>
 </body>
 

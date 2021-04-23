@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO loginCheck(String user_id, String user_pwd) {
-		UserVO user = this.userMapper.loginCheck(user_id);
+		UserVO user = this.userMapper.selectId(user_id);
 		if (user != null) {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			if (encoder.matches(user_pwd, user.getUser_pwd())) {
@@ -46,6 +46,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String getIdwithT(String userInfo) {
 		return this.userMapper.getIdwithT(userInfo);
+	}
+	
+	@Override
+	public int findPwd(String user_id,String user_email) {
+		UserVO user = this.userMapper.selectId(user_id);
+		if(user !=null) {
+			if(user.getUser_email().equals(user_email)) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
 	}
 	
 }
