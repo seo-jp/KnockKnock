@@ -25,7 +25,7 @@ const router = new VueRouter({
         {path:"/NewPwd", component: NewPwd},
         {path:"/LoginMessage/:text", component: LoginMessage},
 
-        {path:"/JoinStep/:step", component: JoinStep},
+        {path:"/JoinStep", component: JoinStep},
     ]
 })
 

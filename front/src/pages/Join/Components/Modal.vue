@@ -4,7 +4,7 @@
         <nav>
             <a
              v-show="keyShow"
-             @click="selectCtx(list.ctxId,list.category)"
+             @click="selectCtx(curCtxId,cutCategory)"
              style="left: 20px; top:14px;">
                 <b-icon
                 style="width: 18px; height: 18px;"
@@ -32,7 +32,7 @@
         <ul v-show="ctxShow">
             <li :key="index" v-for="(ctx,index) in categories">
             <b-button
-            @click=selectCtx(ctx.id,ctx.name)
+            @click="selectCtx(ctx.id,ctx.name)"
             variant="light"
             class="modal-select-btn">
                 {{ ctx.name }}
@@ -45,8 +45,8 @@
         <ul v-show="keyShow">
             <li :key="index" v-for="(key,index) in keywords">
             <b-button
-            v-if="list.ctxId == key.ctxId"
-            @click=selectKey(key.id,key.name)
+            v-if="curCtxId == key.ctxId"
+            @click="selectKey(key.id,key.name)"
             variant="light"
             class="modal-select-btn">
             {{ key.name }}
@@ -55,7 +55,11 @@
         </ul>
 
         <div class="page-container">
-            <b-pagination v-model="currentPage" pills :total-rows="rows" size="sm"></b-pagination>
+            <b-pagination
+            v-model="currentPage"
+            pills :total-rows="rows"
+            size="sm">
+            </b-pagination>
         </div>
 
     </div>
@@ -66,13 +70,7 @@
 export default {
     name: "Modal",
      props: {
-         list: {
-             id: Number,
-             category: String,
-             ctxId: Number,
-             keyword: String,
-             keyId: Number,
-         }
+         list: Object
      },
      data() {
       return {
@@ -81,7 +79,11 @@ export default {
 
         rows: 100,
         currentPage: 1,
+
+        curCtxId: '',
+        cutCategory: '',
         
+        //Async & Await 사용해서 처리
         categories: [
             {
                 id: 1,
@@ -113,14 +115,19 @@ export default {
     },
     methods: {
         selectCtx(id,name) {
-            this.list.category = name
-            this.list.ctxId = id
+            this.curCtxId = id
+            this.cutCategory = name
+            
             this.ctxShow = !this.ctxShow
             this.keyShow = !this.keyShow
         },
         selectKey(id,name) {
+            this.list.category = this.cutCategory
+            this.list.ctxId = this.curCtxId
+
             this.list.keyword = name
             this.list.keyId = id
+
             this.$emit('selectedList',this.list)
             this.closeModal()
         },
@@ -129,10 +136,9 @@ export default {
             this.keyShow = false
             this.$emit('closeModal')
         }
+    },
+    created() {
+        
     }
 };
 </script>
-
-<style scoped>
-     @import '../../../assets/css/Join.css';
-</style>

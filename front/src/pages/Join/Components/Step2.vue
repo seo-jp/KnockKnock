@@ -1,6 +1,7 @@
 <template>
   
   <b-form class="text-center modal-choose-form" style="margin-top:100px;" @submit="onSubmit" @reset="onReset" >
+    
     <h3 class="mt-3 mb-5">{{ title }}</h3>
     
     <ul class="step2-ul">
@@ -39,39 +40,17 @@ export default {
         Modal,
         Button,
     },
+    props: {
+      keyList: Array
+     },
+    computed: {
+      lists: function() {
+        return this.keyList
+      }
+    },
     data() {
       return {
         title: '키워드를 4개 선택해주세요',
-        lists: [
-          {
-            id: 1,
-            category : '1',
-            ctxId: '',
-            keyword: '1',
-            keyId: '',
-          },
-          {
-            id: 2,
-            category : '1',
-            ctxId: '',
-            keyword: '1',
-            keyId: '',
-          },
-          {
-            id: 3,
-            category : '1',
-            ctxId: '',
-            keyword: '1',
-            keyId: '',
-          },
-          {
-            id: 4,
-            category : '1',
-            ctxId: '',
-            keyword: '1',
-            keyId: '',
-          }
-        ], 
         modalShow: false,
         currentId: '',
       }
@@ -86,17 +65,18 @@ export default {
       },
       onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.lists))
-        this.$router.push('/JoinStep/3')
+        this.$emit('sendFrm',this.lists)
+        this.$emit('step',3)
       },
       onReset(event) {
         event.preventDefault()
-        this.lists = ''
+        for(var i in this.lists){
+          this.lists[i].category = ''
+          this.lists[i].ctxId = ''
+          this.lists[i].keyword = ''
+          this.lists[i].keyId = ''
+        }
       }
     }
 }
 </script>
-
-<style scoped>
-     @import '../../../assets/css/Join.css';
-</style>

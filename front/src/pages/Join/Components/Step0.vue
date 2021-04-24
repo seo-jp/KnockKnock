@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        
         <div>
         <b-form class="mt-5" @submit="onSubmit" @reset="onReset" >
 
@@ -73,22 +73,19 @@ export default {
         Button,
         BottomLine,
     },
-    data() {
-      return {
-        form: {
-          name: '',
-          userId: '',
-          password: '',
-          phone: '',
-          email: '',
-        },
+    props: {
+      basicFrm: Object
+     },
+    computed: {
+      form: function() {
+        return this.basicFrm
       }
     },
     methods: {
       onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
-        this.$router.push('/JoinStep/1')
+        this.$emit('sendFrm',this.form)
+        this.$emit('step',1)
       },
       onReset(event) {
         event.preventDefault()
