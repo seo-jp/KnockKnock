@@ -1,5 +1,6 @@
 package com.project.knock.user.service;
 
+import com.project.knock.user.domain.UserKeyVO;
 import com.project.knock.user.domain.UserVO;
 
 public interface UserService {
@@ -13,5 +14,7 @@ public interface UserService {
 	String getIdwithE(String userInfo);
 
 	String getIdwithT(String userInfo);
+
+	UserKeyVO selectUserKey(int user_idx);
 
 }

@@ -3,6 +3,7 @@ package com.project.knock.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.knock.user.domain.UserKeyVO;
 import com.project.knock.user.domain.UserVO;
 import com.project.knock.user.mapper.UserMapper;
 
@@ -44,5 +45,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String getIdwithT(String userInfo) {
 		return this.userMapper.getIdwithT(userInfo);
+	}
+
+	@Override
+	public UserKeyVO selectUserKey(int user_idx) {
+		return this.userMapper.selectUserKey(user_idx);
 	}
 }

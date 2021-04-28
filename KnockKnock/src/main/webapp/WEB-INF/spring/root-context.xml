@@ -26,7 +26,8 @@
         <property name="configLocation" value="classpath:spring/config/mybatis-config.xml"/>
     </bean>
     
-    <mybatis-spring:scan base-package="com.project.knock.user.mapper"/>
+    <mybatis-spring:scan base-package="com.project.knock.*"/>
+
 
     
 </beans>
