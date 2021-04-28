@@ -14,4 +14,6 @@ public interface UserService {
 
 	String getIdwithT(String userInfo);
 
+	int findPwd(String user_id, String user_email);
+
 }

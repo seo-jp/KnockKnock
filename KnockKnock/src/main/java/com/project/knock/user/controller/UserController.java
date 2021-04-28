@@ -1,5 +1,7 @@
 package com.project.knock.user.controller;
 
+import java.util.Random;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -15,9 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.knock.common.util.CommonUtil;
+import com.project.knock.mail.domain.Email;
+import com.project.knock.mail.service.EmailSender;
 import com.project.knock.user.domain.UserVO;
 import com.project.knock.user.service.UserService;
 
@@ -30,6 +33,9 @@ public class UserController {
 	
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
+	
+	@Autowired
+	private EmailSender emailSender;
 
 	@Autowired
 	private CommonUtil util; 
@@ -79,25 +85,26 @@ public class UserController {
     	if(user_id==null||user_id.trim().isEmpty()||user_pwd==null||user_pwd.trim().isEmpty()) {
     		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     	}else {
+    		String result ="";
     		UserVO user = this.userService.loginCheck(user_id,user_pwd);
     		if(user==null) {
-    			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);	
+    			result = "{\"msg\": \"아이디 및 비밀번호가 일치하지 않습니다.\"}";	
     		}else{
     			ses.setAttribute("loginUser",user);
-    			String result = " ";
-    			return new ResponseEntity<String>(result,HttpStatus.OK);
+    			result = "{\"msg\": null}";		
     		} 
+    		return new ResponseEntity<String>(result,HttpStatus.OK);
     	}	
     }
     
     @GetMapping(value="/findId", produces="application/json")
     public ResponseEntity<String> findUserid(
     		  @RequestParam(value="userInfo", required =false)String userInfo){
-    	System.out.println("1="+userInfo);
+    	
     	if(!userInfo.contains("@")&&!userInfo.contains("-")) {
     		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     	}
-    	System.out.println("2="+userInfo);
+    	
     	String data ="";
     	String result ="";
         if(userInfo.contains("@")) {//이메일이라묜
@@ -115,16 +122,40 @@ public class UserController {
     	return new ResponseEntity<String>(result,HttpStatus.OK);
     	
     }
+
     
-    @PostMapping(value="/findPwd", produces="application/json")
-    public ResponseEntity<Integer> findPwd(
+    @PostMapping(value="/mail", produces="application/json")
+    public ResponseEntity<Integer> findPwd (
     		@RequestParam(value="user_id", required =false)String user_id,
-    		@RequestParam(value="user_email", required =false)String user_email){
+    		@RequestParam(value="user_email", required =false)String user_email) throws Exception {    	
+    	int result=0;
     	
-    	
-    	//아직안함...메일.....
-    	int result =0;
-    	
+    	if(user_id==null||user_id.trim().isEmpty()||user_email==null||user_email.trim().isEmpty()) {
+    		return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+    	}else {
+    		result = this.userService.findPwd(user_id,user_email);
+    		if(result==1) {
+    			Email email = new Email();
+    			
+    			StringBuffer temp = new StringBuffer();
+    			Random r = new Random();
+    			for(int i=0;i<=8;i++) {
+    				int rIndex = r.nextInt(2);
+    				if(rIndex==0) {
+    					temp.append((char)((int)(r.nextInt(26))+97));
+    				}else {
+    					temp.append((r.nextInt(10)));
+    				}
+    			}
+    			
+    			email.setReceiver(user_email);
+    			email.setContent("새로운 비밀번호는 "+temp+"입니다.");
+    			email.setSubject("새로운 비밀번호를 보내드립니다.");
+    			
+    			emailSender.SendEmail(email);
+    		}    		
+    	}
+
     	return new ResponseEntity<Integer>(result,HttpStatus.OK);
     }
     

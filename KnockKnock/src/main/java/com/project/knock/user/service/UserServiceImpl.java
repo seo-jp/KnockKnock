@@ -1,6 +1,7 @@
 package com.project.knock.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.knock.user.domain.UserVO;
@@ -24,9 +25,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO loginCheck(String user_id, String user_pwd) {
-		UserVO user = this.userMapper.loginCheck(user_id);
+		UserVO user = this.userMapper.selectId(user_id);
 		if (user != null) {
-			if (user_pwd.equals(user.getUser_id())) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			if (encoder.matches(user_pwd, user.getUser_pwd())) {
 				return user;
 			} else {
               return null;//
@@ -45,4 +47,19 @@ public class UserServiceImpl implements UserService {
 	public String getIdwithT(String userInfo) {
 		return this.userMapper.getIdwithT(userInfo);
 	}
+	
+	@Override
+	public int findPwd(String user_id,String user_email) {
+		UserVO user = this.userMapper.selectId(user_id);
+		if(user !=null) {
+			if(user.getUser_email().equals(user_email)) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
+	}
+	
 }

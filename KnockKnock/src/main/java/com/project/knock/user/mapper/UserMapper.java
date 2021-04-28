@@ -11,10 +11,10 @@ public interface UserMapper {
 
 	int findUserid(String user_id);
 
-	UserVO loginCheck(String user_id);
-
 	String getIdwithE(String userInfo);
 
 	String getIdwithT(String userInfo);
+
+	UserVO selectId(String user_id);
 
 }
