@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.knock.user.domain.UserKeyVO;
 import com.project.knock.user.domain.UserVO;
 import com.project.knock.user.mapper.UserMapper;
 
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
 	public String getIdwithT(String userInfo) {
 		return this.userMapper.getIdwithT(userInfo);
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public int findPwd(String user_id,String user_email) {
@@ -62,4 +64,11 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+=======
+
+	@Override
+	public UserKeyVO selectUserKey(int user_idx) {
+		return this.userMapper.selectUserKey(user_idx);
+	}
+>>>>>>> mijin0414
 }

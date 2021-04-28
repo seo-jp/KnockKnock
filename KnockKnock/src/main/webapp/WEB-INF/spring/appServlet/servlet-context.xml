@@ -44,9 +44,14 @@
 	
 	
 	
+<<<<<<< HEAD
 	<context:component-scan base-package="com.project.knock" />
 	<context:component-scan base-package="com.project.knock.user" />
 	<context:component-scan base-package="com.project.knock.mail" />
+=======
+	<context:component-scan base-package="com.project.knock.*" />
+
+>>>>>>> mijin0414
 	
 	
 	

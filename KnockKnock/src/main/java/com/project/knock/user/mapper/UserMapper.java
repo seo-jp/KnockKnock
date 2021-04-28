@@ -2,6 +2,7 @@ package com.project.knock.user.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.knock.user.domain.UserKeyVO;
 import com.project.knock.user.domain.UserVO;
 
 @Mapper
@@ -15,6 +16,10 @@ public interface UserMapper {
 
 	String getIdwithT(String userInfo);
 
+<<<<<<< HEAD
 	UserVO selectId(String user_id);
+=======
+	UserKeyVO selectUserKey(int user_idx);
+>>>>>>> mijin0414
 
 }
