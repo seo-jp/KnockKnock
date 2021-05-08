@@ -7,7 +7,7 @@
             <h3 class="mb-2">유저 정보 작성</h3>
             
             <b-form-input
-            id="input-1"
+            id="input-name"
             class="mb-2"
             v-model="form.name"
             placeholder="이름"
@@ -16,7 +16,7 @@
             />
 
             <b-form-input
-            id="input-2"
+            id="input-id"
             class="mb-2"
             v-model="form.userId"
             placeholder="사용자 ID"
@@ -25,7 +25,7 @@
             />
 
             <b-form-input
-            id="input-3"
+            id="input-pwd"
             class="mb-2"
             v-model="form.password"
             placeholder="비밀번호"
@@ -34,7 +34,7 @@
             />
 
             <b-form-input
-            id="input-4"
+            id="input-tel"
             class="mb-2"
             v-model="form.phone"
             placeholder="연락처"
@@ -43,7 +43,7 @@
             />
 
             <b-form-input
-            id="input-5"
+            id="input-mail"
             class="mb-3"
             v-model="form.email"
             placeholder="이메일"
@@ -51,6 +51,7 @@
             required
             />
 
+            <span class="error">{{ error }}</span>
             <Button text="입력완료" />
 
         </b-form>
@@ -65,7 +66,7 @@
 
 import Button from '../../../shared-components/small/Button.vue'
 import BottomLine from '../../../shared-components/small/BottomLine.vue'
-
+import { checkForm } from '../../../config/validator'
 
 export default {
     name: "Step0",
@@ -76,6 +77,11 @@ export default {
     props: {
       basicFrm: Object
      },
+     data() {
+      return {
+        error : null,
+      }
+    },
     computed: {
       form: function() {
         return this.basicFrm
@@ -84,8 +90,11 @@ export default {
     methods: {
       onSubmit(event) {
         event.preventDefault()
-        this.$emit('sendFrm',this.form)
-        this.$emit('step',1)
+        this.error = checkForm('step0',this.basicFrm)
+        if(this.error == null) {
+          this.$emit('sendFrm',this.form)
+          this.$emit('step',1)
+        }
       },
       onReset(event) {
         event.preventDefault()

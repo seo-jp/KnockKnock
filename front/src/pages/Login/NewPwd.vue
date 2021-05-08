@@ -6,7 +6,7 @@
         <b-form class="mt-5" @submit="onSubmit" @reset="onReset" >
 
             <b-form-input
-            id="input-1"
+            id="input-pwd"
             class="mb-2"
             v-model="form.oldPwd"
             placeholder="기존 비밀번호"
@@ -15,7 +15,7 @@
             />
 
             <b-form-input
-            id="input-2"
+            id="input-newpwd"
             class="mb-2"
             v-model="form.newPwd"
             placeholder="비밀번호"
@@ -24,7 +24,7 @@
             />
 
             <b-form-input
-            id="input-3"
+            id="input-newpwdchk"
             class="mb-3"
             v-model="form.newPwdCfm"
             placeholder="새 비밀번호 확인"

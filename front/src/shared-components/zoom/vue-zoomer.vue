@@ -106,7 +106,6 @@ export default {
     this.tapDetector.detach(this.$el)
     window.removeEventListener('resize', this.onWindowResize)
     window.cancelAnimationFrame(this.raf)
-    // console.log('destroy')
   },
   methods: {
     // API ---------------------------------------------------------------------

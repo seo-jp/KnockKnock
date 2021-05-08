@@ -1,14 +1,12 @@
 <template>
     <div style="width:320px; margin:0 auto;">
         
-        <!-- 체크박스 색 바꿔주기. -->
-
         <h1>logo</h1>
 
         <b-form class="mt-5" @submit="onSubmit" @reset="onReset" >
 
             <b-form-input
-            id="input-1"
+            id="input-id"
             class="mb-2"
             v-model="form.userId"
             placeholder="아이디"
@@ -16,7 +14,7 @@
             />
 
             <b-form-input
-            id="input-2"
+            id="input-pwd"
             class="mb-3"
             v-model="form.password"
             placeholder="비밀번호"
@@ -35,7 +33,7 @@
 
         </b-form>
 
-        <BottomLine text="계정이 없으신가요?" url="/Join1" point="가입하기" />
+        <BottomLine text="계정이 없으신가요?" url="/JoinStep" point="가입하기" />
 
     </div>
 </template>
@@ -64,7 +62,6 @@ export default {
     methods: {
       onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
       },
       onReset(event) {
         event.preventDefault()

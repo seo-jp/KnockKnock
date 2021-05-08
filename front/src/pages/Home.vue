@@ -4,6 +4,15 @@
 
 <script>
 export default {
-    name: 'Home',
+  name: 'Home',
+  data() {
+    return {
+      loginSessionId: null,
+    };
+  },
+  created() {
+      this.loginSessionId = false
+      this.loginSessionId ? console.log('login success') : this.$router.replace('login')
+  }
 }
 </script>

@@ -16,6 +16,7 @@
       </li>
     </ul>
     
+    <span class="error">{{ error }}</span>
     <Button class="mt-5" text="선택완료" />
     
     <Modal 
@@ -33,6 +34,7 @@
 
 import Modal from './Modal.vue'
 import Button from '../../../shared-components/small/Button.vue'
+import { checkForm } from '../../../config/validator'
 
 export default {
     name: "Step2",
@@ -53,6 +55,7 @@ export default {
         title: '키워드를 4개 선택해주세요',
         modalShow: false,
         currentId: '',
+        error: null,
       }
     },
     methods: {
@@ -65,8 +68,11 @@ export default {
       },
       onSubmit(event) {
         event.preventDefault()
-        this.$emit('sendFrm',this.lists)
-        this.$emit('step',3)
+        this.error = checkForm('step2',this.lists)
+        if(this.error == null) {
+          this.$emit('sendFrm',this.lists)
+          this.$emit('step',3)
+        }
       },
       onReset(event) {
         event.preventDefault()

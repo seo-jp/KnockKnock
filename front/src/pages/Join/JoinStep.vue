@@ -11,17 +11,6 @@
           <Step1 v-show="step == 1" @step="setStep" :profileFrm="this.profile" />
           <Step2 v-show="step == 2" @step="setStep" :keyList="this.kwd" />
           <Step3 v-show="step == 3" @step="setStep" :keyList="this.kwd" />
-          <br />
-          <br />
-          {{ basic }}
-          <br />
-          <br />
-          {{ profile }}
-          <br />
-          <br />
-          {{ kwd }}
-          <br />
-          <br />
           <Step4 v-show="step == 4" />
          </div>
 
@@ -37,6 +26,7 @@ import Step2 from './Components/Step2.vue'
 import Step3 from './Components/Step3.vue'
 import Step4 from './Components/Step4.vue'
 
+
 export default {
     name: "JoinStep",
     components: {
@@ -49,76 +39,100 @@ export default {
     },
     data() {
       return {
-        step: null,
-        basic: null,
-        profile: null,
-        kwd: []
+        step: null, //header menu
+        basic: null, // step0
+        profile: null, // step1
+        kwd: [], // step 2-3
       }
     },
     methods: {
+      // 페이지 이동 (using : header)
       setStep(i){
         this.step = i
       },
     },
     created() {
-      this.step = 0
+      this.step = 1
       this.basic = {
-        name: '',
-        userId: '',
-        password: '',
-        phone: '',
-        email: '',
+        name: null,
+        userId: null,
+        password: null,
+        phone: null,
+        email: null,
       },
-
       this.profile = {
-        imageUrl: '',
-        imageStyle: '',
+        imageUrl: null,
+        imageStyle: null,
       },
 
-      this.kwd = [
+    this.kwd = [
         {
           id: 1,
-          category : '',
-          ctxId: '',
-          keyword: '',
-          keyId: '',
+          category : null,
+          ctxId: null,
+          keyword: null,
+          keyId: null,
           imageUrl: null,
+          imgStyle: null,
+          feedText: null,
+
           zoomed: false,
           selectedImage: false,
-          imgStyle:'',
+          oldTempUrl: null,
+          oldTempStyle: null,
+          tempStyle: null,
+          tempUrl: null
         },
         {
           id: 2,
-          category : '',
-          ctxId: '',
-          keyword: '',
-          keyId: '',
+          category : null,
+          ctxId: null,
+          keyword: null,
+          keyId: null,
           imageUrl: null,
+          imgStyle: null,
+          feedText: null,
+
           zoomed: false,
           selectedImage: false,
-          imgStyle:'',
+          oldTempUrl: null,
+          oldTempStyle: null,
+          tempStyle: null,
+          tempUrl: null
         },
         {
           id: 3,
-          category : '',
-          ctxId: '',
-          keyword: '',
-          keyId: '',
+          category : null,
+          ctxId: null,
+          keyword: null,
+          keyId: null,
           imageUrl: null,
+          imgStyle: null,
+          feedText: null,
+
           zoomed: false,
           selectedImage: false,
-          imgStyle:'',
+          oldTempUrl: null,
+          oldTempStyle: null,
+          tempStyle: null,
+          tempUrl: null
         },
         {
           id: 4,
-          category : '',
-          ctxId: '',
-          keyword: '',
-          keyId: '',
+          category : null,
+          ctxId: null,
+          keyword: null,
+          keyId: null,
           imageUrl: null,
+          imgStyle: null,
+          feedText: null,
+
           zoomed: false,
           selectedImage: false,
-          imgStyle:'',
+          oldTempUrl: null,
+          oldTempStyle: null,
+          tempStyle: null,
+          tempUrl: null
         }
       ]
     }
@@ -128,4 +142,3 @@ export default {
 <style scoped>
     @import '../../assets/css/Join.css';
 </style>
-

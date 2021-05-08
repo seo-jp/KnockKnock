@@ -7,7 +7,7 @@
             
             <h3 class="mb-2">아이디 찾기</h3>
             <b-form-input
-            id="input-1"
+            id="input-mailandtel"
             class="mb-2"
             v-model="formId.search"
             placeholder="이메일 혹은 연락처"
@@ -33,7 +33,7 @@
             
             <h3 class="mb-2">비밀번호 찾기</h3>
             <b-form-input
-            id="input-2"
+            id="input-id"
             class="mb-2"
             v-model="formPwd.userId"
             placeholder="아이디"
@@ -42,7 +42,7 @@
             />
 
             <b-form-input
-            id="input-3"
+            id="input-mail"
             class="mb-2"
             v-model="formPwd.email"
             placeholder="이메일주소"

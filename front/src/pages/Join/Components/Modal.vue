@@ -12,8 +12,8 @@
                 flip-v />
             </a>
             
-            <h4 v-show="ctxShow">카테고리</h4>
-            <h4 v-show="keyShow">키워드</h4>
+            <h4 class="text-center" v-show="ctxShow">카테고리</h4>
+            <h4 class="text-center" v-show="keyShow">키워드</h4>
             
             <a
             style="right: 20px; top:12px;">

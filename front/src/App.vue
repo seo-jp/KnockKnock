@@ -34,6 +34,7 @@ export default {
 <style>
 a:hover {
   text-decoration: none!important;
+  color: none!important;
 }
 
 li {
@@ -51,4 +52,10 @@ li {
   -moz-osx-font-smoothing: grayscale;
 
 }
+
+#content {
+  width: 100%;
+  margin: 0;
+}
+
 </style>
